@@ -1,7 +1,10 @@
 FROM centos:7
 
-ENV DOCMOSIS_VERSION=2.6_7107 \
-    LIBREOFFICE_VERSION=6.1.3
+ENV DOCMOSIS_VERSION=2.7.1_7950 \
+    LIBREOFFICE_VERSION=6.1.3 \
+    DOCMOSIS_OFFICEDIR=/opt/libreoffice \
+    DOCMOSIS_TEMPLATESDIR=templates \
+    DOCMOSIS_WORKINGDIR=workingarea
 
 # epel for cabextract
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
@@ -60,14 +63,13 @@ RUN groupadd docmosis \
 
 WORKDIR /home/docmosis
 
-RUN wget https://www.docmosis.com/download/tornado$(echo $DOCMOSIS_VERSION | cut -f1 -d_)/docmosisTornado${DOCMOSIS_VERSION}.zip \
+RUN DOCMOSIS_VERSION_SHORT=$(echo $DOCMOSIS_VERSION | cut -f1 -d_ | cut -b-3) \
+    && wget https://www.docmosis.com/download/tornado${DOCMOSIS_VERSION_SHORT}/docmosisTornado${DOCMOSIS_VERSION}.zip \
     && unzip docmosisTornado${DOCMOSIS_VERSION}.zip docmosisTornado*.war \
     && mv docmosisTornado*.war docmosisTornado.war \
     && rm -f docmosisTornado${DOCMOSIS_VERSION}.zip
 
 COPY log4j.properties /home/docmosis/
-COPY prefs.xml /home/docmosis/.java/.userPrefs/com/docmosis/webserver/prefs.xml
-RUN chown -R docmosis:docmosis /home/docmosis/.java
 
 USER docmosis
 RUN mkdir /home/docmosis/templates /home/docmosis/workingarea
