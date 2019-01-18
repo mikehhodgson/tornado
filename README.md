@@ -112,7 +112,7 @@ It can be useful to define the launch configuration in a Docker Compose file. Th
 
 When Docmosis Tornado has started successfully, you can point your browser to Docker container to use the Tornado Web Console. If Tornado has started successfully, you will be navigated to the Status tab and the engine status will be Running. In this screen you can select templates and run test data to generate Documents. This is a useful test-platform that can assist development before generating documents via the API.
 
-![Docmosis Tornado Status Page](images/status.png)
+![Docmosis Tornado Status Page](https://raw.githubusercontent.com/mikehhodgson/tornado/master/images/status.png)
 
 If the start up is not succesful review the ouput logged from the Docker command. This will typically indicate what has gone wrong.
 
@@ -188,60 +188,129 @@ We hope you enjoy using Tornado.
 
 The following settings can be added to the Custom Settings on the Configuration page to enable
 
-Setting | Description
---------|------------
-`port` | Specify the port on which the console and the web services will listen
-`license` | Specify the Tornado license all as one string. This includes the key and the site and overrides the key and site parameters below. "\n" is used to provide separate lines.<br>eg<br>`license="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX\ndocmosis.site=Free Trial License"`
-`key` | Specify the key part of the Tornado license. This requires the site or site1-3 parameters also.<br>eg<br>`key="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX"`<br>`site="Docmosis.site=Free Trial License"`<br>or<br>`key="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX"`<br>`site1="Docmosis.site=Free Trial License"`<br>`site2="next line of site string" (if required)`<br>`site3="another line of site string" (if required)`
-`site` | The full site string using "\n" to specify multiple lines as require (if key is multiple lines). Overrides the site1..site3 parameters and requires the key parameter.
-`site1` | Specify the first line of the site
-`site2` | Specify the second line of the site (if required)
-`site3` | Specify the third line of the site (if required)
-`officeDir` | Specify the office install location for LibreOffice
-`templatesDir` | Specify where templates will be sourced from (original templates)
-`workingDir` | Specify where logs and working caches are to be stored
-`adminPw` | Specify the admin password for access the web console. Optional.
-`accessKey` | Specify the access key for calling the web service end points. Optional.
-`customSettings` | Specify any custom settings using the format key=value and separating settings by "\n". For example:<br>`customSettings="docmosis.xyz=abc\ndocmosis.xyz.2=def"`
-`templatePrefix` | Specify the template field prefix. Defaults to <<. Must be at least 2 chars.
-`templateSuffix` | Specify the template field suffix. Defaults to >>. Must be at least 2 chars.
+- `port`  
+  Specify the port on which the console and the web services will listen
+
+- `license`  
+   Specify the Tornado license all as one string. This includes the key and the site and overrides the key and site parameters below. "\n" is used to provide separate lines.  
+   eg  
+   `license="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX\ndocmosis.site=Free Trial License"`
+
+- `key`  
+   Specify the key part of the Tornado license. This requires the site or site1-3 parameters also.  
+   eg
+  `key="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX"`<br>`site="Docmosis.site=Free Trial License"`  
+   or  
+   `key="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX"`  
+   `site1="Docmosis.site=Free Trial License"`  
+   `site2="next line of site string" (if required)`  
+   `site3="another line of site string" (if required)`
+
+- `site`  
+   The full site string using "\n" to specify multiple lines as require (if key is multiple lines). Overrides the site1..site3 parameters and requires the key parameter.
+
+- `site1`  
+  Specify the first line of the site
+
+- `site2`  
+  Specify the second line of the site (if required)
+
+- `site3`  
+  Specify the third line of the site (if required)
+
+- `officeDir`  
+  Specify the office install location for LibreOffice
+
+- `templatesDir`  
+  Specify where templates will be sourced from (original templates)
+
+- `workingDir`  
+   Specify where logs and working caches are to be stored
+
+- `adminPw`  
+  Specify the admin password for access the web console. Optional.
+
+- `accessKey`  
+  Specify the access key for calling the web service end points. Optional.
+
+- `customSettings`  
+  Specify any custom settings using the format key=value and separating settings by "\n". For example:  
+  `customSettings="docmosis.xyz=abc\ndocmosis.xyz.2=def"`
+
+- `templatePrefix`  
+  Specify the template field prefix. Defaults to <<. Must be at least 2 chars.
+
+- `templateSuffix`  
+  Specify the template field suffix. Defaults to >>. Must be at least 2 chars.
 
 ### Control of Logging
 
 Logging of information by Tornado can be controlled by several command line settings:
 
-Setting | Description
---------|------------
-`log.level=debug\|info\|error` | Specify the level of logging to the console and log files.<br>eg: `java –Dlog.level=debug –jar docmosisTornado.war`
-`log4j.config.file=path` | Specify log4j logging configuration file. Overrides log4j.level<br>eg: `java –Dlog4j.config.file=c:/projects/log4j.properties –jar docmosisTornado.war`
-`java.util.logging.config.file=path` | Specify the Java Util logging configuration file. Overrides log.level.<br>eg: `java –Djava.util.logging.config.file=c:/logging.properties ..`
-`log.dir.override` | Override the location where logs are to be written<br>(default is `<working area>/logs`)
+- `log.level=debug\|info\|error`  
+  Specify the level of logging to the console and log files.  
+  eg: `java –Dlog.level=debug –jar docmosisTornado.war`
+
+- `log4j.config.file=path`  
+  Specify log4j logging configuration file. Overrides log4j.level  
+  eg: `java –Dlog4j.config.file=c:/projects/log4j.properties –jar docmosisTornado.war`
+
+- `java.util.logging.config.file=path`  
+  Specify the Java Util logging configuration file. Overrides log.level.  
+  eg: `java –Djava.util.logging.config.file=c:/logging.properties ..`
+
+- `log.dir.override`  
+  Override the location where logs are to be written (default is `<working area>/logs`)
 
 ### Enabling SSL/TLS Encryption
 
 The following settings can be added to the Custom Settings on the Configuration page to enable SSL/TLS Encryption:
 
-Setting | Description
---------|------------
-`ssl.port=port` | The port to listen for secured connections.
-`javax.net.ssl.keyStore=path` | The path to the key store file.
-`javax.net.ssl.keyStorePassword=password` | The key store file password.
-`javax.net.ssl.trustStore=path` | The path to the trust store file.
-`javax.net.ssl.trustStorePassword=password` | The trust store file password.
-`http.disable=true\|false` | Determines whether the non-secure listener should be disabled. Defaults to false.
+- `ssl.port=port`  
+  The port to listen for secured connections.
+
+- `javax.net.ssl.keyStore=path`  
+  The path to the key store file.
+
+- `javax.net.ssl.keyStorePassword=password`  
+  The key store file password.
+
+- `javax.net.ssl.trustStore=path`  
+  The path to the trust store file.
+
+- `javax.net.ssl.trustStorePassword=password`  
+  The trust store file password.
+
+- `http.disable=true\|false`  
+  Determines whether the non-secure listener should be disabled. Defaults to false.
 
 Please see your Java documentation for more information on the specifics of what these settings do.
 
 ### Enabling Email from Tornado
 
-Setting | Description
---------|------------
-`mailEnabled` | Enable the mail server. Default is false.
-`mailHost` | The mail server hostname
-`mailPort` | The mail server port
-`mailUser` | The mail server user name
-`mailPw` | The mail server password
-`mailFrom` | The from email address
-`mailTimeout` | The mail server connect-timeout in milliseconds
-`mailUseTls` | Enable TLS security on the connection to the mail server. Default false.
-`mailUseSsl` | Enable SSL security on the connection to the mail server. Default false.
+- `mailEnabled`  
+  Enable the mail server. Default is false.
+
+- `mailHost`  
+  The mail server hostname
+
+- `mailPort`  
+  The mail server port
+
+- `mailUser`  
+  The mail server user name
+
+- `mailPw`  
+  The mail server password
+
+- `mailFrom`  
+  The from email address
+
+- `mailTimeout`  
+  The mail server connect-timeout in milliseconds
+
+- `mailUseTls`  
+  Enable TLS security on the connection to the mail server. Default false.
+
+- `mailUseSsl`  
+  Enable SSL security on the connection to the mail server. Default false.
