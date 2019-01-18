@@ -1,10 +1,11 @@
 FROM centos:7
 
-ENV DOCMOSIS_VERSION=2.7.1_7950 \
+ENV DOCMOSIS_VERSION=2.7.2_7976 \
     LIBREOFFICE_VERSION=6.1.3 \
     DOCMOSIS_OFFICEDIR=/opt/libreoffice \
     DOCMOSIS_TEMPLATESDIR=templates \
-    DOCMOSIS_WORKINGDIR=workingarea
+    DOCMOSIS_WORKINGDIR=workingarea \
+    DOCMOSIS_LOG4J_CONFIG_FILE=log4j.properties
 
 # epel for cabextract
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
@@ -76,4 +77,4 @@ RUN mkdir /home/docmosis/templates /home/docmosis/workingarea
 
 EXPOSE 8080
 VOLUME /home/docmosis/templates
-CMD java -Dlog4j.config.file=log4j.properties -Ddocmosis.tornado.render.useUrl=http://localhost:8080/ -jar docmosisTornado.war
+CMD java -Ddocmosis.tornado.render.useUrl=http://localhost:8080/ -jar docmosisTornado.war
