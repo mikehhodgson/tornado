@@ -199,7 +199,8 @@ The following settings can be added to the Custom Settings on the Configuration 
 - `key`  
    Specify the key part of the Tornado license. This requires the site or site1-3 parameters also.  
    eg
-  `key="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX"`<br>`site="Docmosis.site=Free Trial License"`  
+  `key="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX"`  
+  `site="Docmosis.site=Free Trial License"`  
    or  
    `key="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX"`  
    `site1="Docmosis.site=Free Trial License"`  
@@ -247,7 +248,7 @@ The following settings can be added to the Custom Settings on the Configuration 
 
 Logging of information by Tornado can be controlled by several command line settings:
 
-- `log.level=debug\|info\|error`  
+- `log.level=debug|info|error`  
   Specify the level of logging to the console and log files.  
   eg: `java –Dlog.level=debug –jar docmosisTornado.war`
 
@@ -281,7 +282,7 @@ The following settings can be added to the Custom Settings on the Configuration 
 - `javax.net.ssl.trustStorePassword=password`  
   The trust store file password.
 
-- `http.disable=true\|false`  
+- `http.disable=true|false`  
   Determines whether the non-secure listener should be disabled. Defaults to false.
 
 Please see your Java documentation for more information on the specifics of what these settings do.
