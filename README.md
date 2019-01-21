@@ -88,7 +88,7 @@ The -e flag can be used multiple times to set different configuration values as 
 
 ### Logging outside of the Docker Container
 
-The Tornado container will by default log to console. This is set by a log4j configuration file included in the image. You may also instead wish to have the logs written outside of the Docker container so they are accessible (and persistent). To write the logs to file, you can override the log4j configuration to a blank value, and then map a volume to the default log folder `/home/docmosis/workingarea/logs`.
+The Tornado container will by default log to console. This is set by a log4j configuration file included in the image. You may instead wish to have the logs written to a file outside of the Docker container so they are accessible (and persistent). To write the logs to file, you can override the log4j configuration to a blank value, and then map a volume to the default log folder `/home/docmosis/workingarea/logs`.
 
 To set the logging to write outside the container:
 
@@ -103,7 +103,7 @@ To set the logging to write outside the container:
 
 ### Enabling Debug Logging
 
-To have more detailed logging enabled the
+To have more detailed logging enable debug by setting the log level as follows:
 
     docker run --name <container name> \
       -p <host port>:8080 \
