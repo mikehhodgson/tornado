@@ -1,3 +1,5 @@
+![Docmosis](https://raw.githubusercontent.com/mikehhodgson/tornado/master/images/docmosis.png)
+
 # Getting Started with Tornado Using Docker BETA
 
 ## Introduction
@@ -5,6 +7,26 @@
 Running Tornado using Docker is a simple way to get up and running quickly. Tornado can be launched via Docker with only a few steps with a default configuration and can also fully configured via the launching process.
 
 This guide assumes the user is already familiar with Docker and focuses on the Docmosis Tornado specifics.
+
+## Contents
+
+- [Running Tornado using Docker](#running-tornado-using-docker)
+- [Container Settings](#container-settings)
+  - [Logging outside of the Docker Container](#logging-outside-of-the-docker-container)
+  - [Enabling Debug Logging](#enabling-debug-logging)
+- [Running Tornado using Docker Compose](#running-tornado-using-docker-compose)
+- [Running the Server and Testing](#running-the-server-and-testing)
+  - [Creating Dummy Data](#creating-dummy-data)
+  - [Creating a Document](#creating-a-document)
+- [Generating Documents from Your Application](#generating-documents-from-your-application)
+  - [Comparing Tornado with Docmosis Cloud](#comparing-tornado-with-docmosis-cloud)
+- [Monitoring Tornado](#monitoring-tornado)
+- [More Help](#more-help)
+- [All Configuration Options](#all-configuration-options)
+  - [Common Settings](#common-settings)
+  - [Control of Logging](#control-of-logging)
+  - [Enabling SSL/TLS Encryption](#enabling-ssl/tls-encryption)
+  - [Enabling Email from Tornado](#enabling-email-from-tornado)
 
 ## Running Tornado using Docker
 
