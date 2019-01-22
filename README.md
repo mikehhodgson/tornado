@@ -25,7 +25,7 @@ This guide assumes the user is already familiar with Docker and focuses on the D
 - [All Configuration Options](#all-configuration-options)
   - [Common Settings](#common-settings)
   - [Control of Logging](#control-of-logging)
-  - [Enabling SSL/TLS Encryption](#enabling-ssl/tls-encryption)
+  - [Enabling SSL/TLS Encryption](#enabling-ssltls-encryption)
   - [Enabling Email from Tornado](#enabling-email-from-tornado)
 
 ## Running Tornado using Docker
