@@ -70,11 +70,11 @@ Using Windows PowerShell:
 
 The Docmosis Tornado Docker synopsis is (Linux style commands are used from here on):
 
-    docker run --name <container name> \
-      -p <host port>:8080 \
-      -v <host templates directory>:/home/docmosis/templates \
-      -e DOCMOSIS_KEY=<license key> \
-      -e DOCMOSIS_SITE=<license site> \
+    docker run --name [container name] \
+      -p [host port]:8080 \
+      -v [host templates directory]:/home/docmosis/templates \
+      -e DOCMOSIS_KEY=[license key] \
+      -e DOCMOSIS_SITE=[license site] \
       docmosis/tornado
 
     Parameters:
@@ -92,24 +92,24 @@ The Tornado container will by default log to console. This is set by a log4j con
 
 To set the logging to write outside the container:
 
-    docker run --name <container name> \
-      -p <host port>:8080 \
-      -v <host templates directory>:/home/docmosis/templates \
-      -e DOCMOSIS_KEY=<license key> \
-      -e DOCMOSIS_SITE=<license site> \
+    docker run --name [container name] \
+      -p [host port]:8080 \
+      -v [host templates directory]:/home/docmosis/templates \
+      -e DOCMOSIS_KEY=[license key] \
+      -e DOCMOSIS_SITE=[license site] \
       -e DOCMOSIS_LOG4J_CONFIG_FILE= \
-      -v <host logging directory>:/home/docmosis/workingarea/logs \
+      -v [host logging directory]:/home/docmosis/workingarea/logs \
       docmosis/tornado
 
 ### Enabling Debug Logging
 
 To have more detailed logging enable debug by setting the log level as follows:
 
-    docker run --name <container name> \
-      -p <host port>:8080 \
-      -v <host templates directory>:/home/docmosis/templates \
-      -e DOCMOSIS_KEY=<license key> \
-      -e DOCMOSIS_SITE=<license site> \
+    docker run --name [container name] \
+      -p [host port]:8080 \
+      -v [host templates directory]:/home/docmosis/templates \
+      -e DOCMOSIS_KEY=[license key] \
+      -e DOCMOSIS_SITE=[license site] \
       -e DOCMOSIS_LOG_LEVEL=DEBUG
       docmosis/tornado
 
@@ -124,12 +124,12 @@ It can be useful to define the launch configuration in a Docker Compose file. Th
       tornado:
         image: docmosis/tornado
         ports:
-         - "<host port>:8080"
+         - "[host port]:8080"
         volumes:
-         - <host templates directory>:/home/docmosis/templates
+         - [host templates directory]:/home/docmosis/templates
         environment:
-          DOCMOSIS_KEY: "<license key>"
-          DOCMOSIS_SITE: "<license site>"
+          DOCMOSIS_KEY: "[license key]"
+          DOCMOSIS_SITE: "[license site]"
 
 ## Running the Server and Testing
 
@@ -294,7 +294,7 @@ Logging of information by Tornado can be controlled by several command line sett
   eg: `java –Djava.util.logging.config.file=c:/logging.properties ..`
 
 - `log.dir.override`  
-  Override the location where logs are to be written (default is `<working area>/logs`)
+  Override the location where logs are to be written (default is `[working area]/logs`)
 
 ### Enabling SSL/TLS Encryption
 
