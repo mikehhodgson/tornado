@@ -1,7 +1,7 @@
 FROM centos:7
 
-ENV DOCMOSIS_VERSION=2.7.2_7976 \
-    LIBREOFFICE_VERSION=6.1.3 \
+ENV DOCMOSIS_VERSION=2.7.2_8016 \
+    LIBREOFFICE_VERSION=6.1.4 \
     DOCMOSIS_OFFICEDIR=/opt/libreoffice \
     DOCMOSIS_TEMPLATESDIR=templates \
     DOCMOSIS_WORKINGDIR=workingarea \
@@ -45,8 +45,8 @@ RUN yum install -y https://downloads.sourceforge.net/project/mscorefonts2/rpms/m
 RUN wget http://mirror.sjc02.svwh.net/tdf/libreoffice/stable/${LIBREOFFICE_VERSION}/rpm/x86_64/LibreOffice_${LIBREOFFICE_VERSION}_Linux_x86-64_rpm.tar.gz \
     && tar -xf LibreOffice_${LIBREOFFICE_VERSION}_Linux_x86-64_rpm.tar.gz \
     && cd LibreOffice_*_Linux_x86-64_rpm/RPMS \
-    && rm -f *integ* || true \
-    && rm -f *desk* || true \
+    && (rm -f *integ* || true) \
+    && (rm -f *desk* || true) \
     && yum localinstall -y --setopt=tsflags=nodocs *.rpm \
     && yum clean all \
     && rm -rf /var/cache/yum \
