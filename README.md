@@ -1,3 +1,5 @@
+![Docmosis](https://raw.githubusercontent.com/mikehhodgson/tornado/master/images/docmosis.png)
+
 # Getting Started with Tornado Using Docker BETA
 
 ## Introduction
@@ -5,6 +7,26 @@
 Running Tornado using Docker is a simple way to get up and running quickly. Tornado can be launched via Docker with only a few steps with a default configuration and can also fully configured via the launching process.
 
 This guide assumes the user is already familiar with Docker and focuses on the Docmosis Tornado specifics.
+
+## Contents
+
+- [Running Tornado using Docker](#running-tornado-using-docker)
+- [Container Settings](#container-settings)
+  - [Logging outside of the Docker Container](#logging-outside-of-the-docker-container)
+  - [Enabling Debug Logging](#enabling-debug-logging)
+- [Running Tornado using Docker Compose](#running-tornado-using-docker-compose)
+- [Running the Server and Testing](#running-the-server-and-testing)
+  - [Creating Dummy Data](#creating-dummy-data)
+  - [Creating a Document](#creating-a-document)
+- [Generating Documents from Your Application](#generating-documents-from-your-application)
+  - [Comparing Tornado with Docmosis Cloud](#comparing-tornado-with-docmosis-cloud)
+- [Monitoring Tornado](#monitoring-tornado)
+- [More Help](#more-help)
+- [All Configuration Options](#all-configuration-options)
+  - [Common Settings](#common-settings)
+  - [Control of Logging](#control-of-logging)
+  - [Enabling SSL/TLS Encryption](#enabling-ssltls-encryption)
+  - [Enabling Email from Tornado](#enabling-email-from-tornado)
 
 ## Running Tornado using Docker
 
@@ -66,28 +88,29 @@ The -e flag can be used multiple times to set different configuration values as 
 
 ### Logging outside of the Docker Container
 
-Tornado will by default log into the `/home/docmosis/workingarea/logs` folder inside the Docker container. You can connect to the Docker container to examine the logs. You may also instead wish to have the logs written outside of the container so they are accessible (and persistent) outside of the running Docker instance.
+The Tornado container will by default log to console. This is set by a log4j configuration file included in the image. You may instead wish to have the logs written to a file outside of the Docker container so they are accessible (and persistent). To write the logs to file, you can override the log4j configuration to a blank value, and then map a volume to the default log folder `/home/docmosis/workingarea/logs`.
 
 To set the logging to write outside the container:
 
     docker run --name [container name] \
       -p [host port]:8080 \
       -v [host templates directory]:/home/docmosis/templates \
-      -v [host logging directory]:/home/docmosis/workingarea/logs \
       -e DOCMOSIS_KEY=[license key] \
       -e DOCMOSIS_SITE=[license site] \
+      -e DOCMOSIS_LOG4J_CONFIG_FILE= \
+      -v [host logging directory]:/home/docmosis/workingarea/logs \
       docmosis/tornado
 
 ### Enabling Debug Logging
 
-To have more detailed logging enabled the
+To have more detailed logging enable debug by setting the log level as follows:
 
     docker run --name [container name] \
       -p [host port]:8080 \
       -v [host templates directory]:/home/docmosis/templates \
       -e DOCMOSIS_KEY=[license key] \
       -e DOCMOSIS_SITE=[license site] \
-      -e LOG_LEVEL=DEBUG
+      -e DOCMOSIS_LOG_LEVEL=DEBUG
       docmosis/tornado
 
 ## Running Tornado using Docker Compose
@@ -193,19 +216,29 @@ The following settings can be added to the Custom Settings on the Configuration 
 
 - `license`  
    Specify the Tornado license all as one string. This includes the key and the site and overrides the key and site parameters below. "\n" is used to provide separate lines.  
-   eg  
-   `license="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX\ndocmosis.site=Free Trial License"`
+   eg
+
+  ```
+  license="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX\ndocmosis.site=Free Trial License"
+  ```
 
 - `key`  
    Specify the key part of the Tornado license. This requires the site or site1-3 parameters also.  
    eg
-  `key="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX"`  
-  `site="Docmosis.site=Free Trial License"`  
-   or  
-   `key="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX"`  
-   `site1="Docmosis.site=Free Trial License"`  
-   `site2="next line of site string" (if required)`  
-   `site3="another line of site string" (if required)`
+
+  ```
+  key="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX"
+  site="Docmosis.site=Free Trial License"
+  ```
+
+  or
+
+  ```
+  key="docmosis.key=XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-X-XXXX"
+  site1="Docmosis.site=Free Trial License"
+  site2="next line of site string" (if required)
+  site3="another line of site string" (if required)
+  ```
 
 - `site`  
    The full site string using "\n" to specify multiple lines as require (if key is multiple lines). Overrides the site1..site3 parameters and requires the key parameter.
