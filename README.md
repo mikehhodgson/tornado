@@ -27,6 +27,7 @@ This guide assumes the user is already familiar with Docker and focuses on the D
   - [Control of Logging](#control-of-logging)
   - [Enabling SSL/TLS Encryption](#enabling-ssltls-encryption)
   - [Enabling Email from Tornado](#enabling-email-from-tornado)
+- [License](#license)
 
 ## Running Tornado using Docker
 
@@ -348,3 +349,11 @@ Please see your Java documentation for more information on the specifics of what
 
 - `mailUseSsl`  
   Enable SSL security on the connection to the mail server. Default false.
+
+## License
+
+By downloading Tornado you agree to our most recent [License Agreement (PDF)](https://www.docmosis.com/download/DocmosisLicenseAgreement.pdf).
+
+As with all Docker images, these likely also contain other software which may be under other licenses (such as Bash, etc from the base distribution, along with any direct or indirect dependencies of the primary software being contained).
+
+As for any pre-built image usage, it is the image user's responsibility to ensure that any use of this image complies with any relevant licenses for all software contained within.
