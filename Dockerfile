@@ -1,7 +1,9 @@
 FROM centos:7
 
 # epel for cabextract
-RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
+RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 \
+    && yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
+    && rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 \
     && yum install -y --setopt=tsflags=nodocs \
     java-1.8.0-openjdk \
     #
@@ -69,11 +71,11 @@ RUN DOCMOSIS_VERSION_SHORT=$(echo $DOCMOSIS_VERSION | cut -f1 -d_ | cut -b-3) \
     && mv docmosisTornado*.war docmosisTornado.war \
     && rm -f docmosisTornado${DOCMOSIS_VERSION}.zip
 
-RUN  printf '%s\n' \
+RUN printf '%s\n' \
     "#Normal logging at INFO level" \
     "log4j.rootCategory=INFO, A1" \
     "" \
-    "#Detailed logging at DEBUG level"\
+    "#Detailed logging at DEBUG level" \
     "#log4j.rootCategory=DEBUG, A1" \
     "" \
     "log4j.appender.A1=org.apache.log4j.ConsoleAppender" \
