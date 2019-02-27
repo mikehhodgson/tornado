@@ -37,7 +37,11 @@ The following three steps will create a running Tornado server for you to work w
 
 2. Create a folder on your computer (the docker host) where you will put your Docmosis templates. We will map this to a folder inside the Docker container and Tornado will find templates you place into this folder.
 
-3. Launch a Tornado container as follows, inserting your license key and path to templates folder.
+3. Build the Docmosis Tornado Docker image:
+
+   docker build --tag docmosis/tornado https://raw.githubusercontent.com/mikehhodgson/tornado/master/Dockerfile
+
+4. Launch a Tornado container as follows, inserting your license key and path to templates folder.
 
 For example, in **Linux** to use a folder `/home/docmosisTemplates` with a Tornado host running on port 8080:
 
