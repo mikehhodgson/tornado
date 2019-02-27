@@ -37,7 +37,8 @@ RUN yum install -y https://downloads.sourceforge.net/project/mscorefonts2/rpms/m
 ENV LIBREOFFICE_VERSION=6.1.4
 
 # mirror list https://download.documentfoundation.org/mirmon/allmirrors.html
-RUN wget http://mirror.sjc02.svwh.net/tdf/libreoffice/stable/${LIBREOFFICE_VERSION}/rpm/x86_64/LibreOffice_${LIBREOFFICE_VERSION}_Linux_x86-64_rpm.tar.gz \
+RUN echo "Downloading LibreOffice ${LIBREOFFICE_VERSION}..." \
+    && wget --quiet http://mirror.sjc02.svwh.net/tdf/libreoffice/stable/${LIBREOFFICE_VERSION}/rpm/x86_64/LibreOffice_${LIBREOFFICE_VERSION}_Linux_x86-64_rpm.tar.gz \
     && tar -xf LibreOffice_${LIBREOFFICE_VERSION}_Linux_x86-64_rpm.tar.gz \
     && cd LibreOffice_*_Linux_x86-64_rpm/RPMS \
     && (rm -f *integ* || true) \
@@ -62,8 +63,9 @@ WORKDIR /home/docmosis
 ENV DOCMOSIS_VERSION=2.7.2_8016
 
 RUN DOCMOSIS_VERSION_SHORT=$(echo $DOCMOSIS_VERSION | cut -f1 -d_ | cut -b-3) \
-    && wget https://www.docmosis.com/download/tornado${DOCMOSIS_VERSION_SHORT}/docmosisTornado${DOCMOSIS_VERSION}.zip \
-    && unzip docmosisTornado${DOCMOSIS_VERSION}.zip docmosisTornado*.war \
+    && echo "Downloading Docmosis Tornado ${DOCMOSIS_VERSION}..." \
+    && wget --quiet https://www.docmosis.com/download/tornado${DOCMOSIS_VERSION_SHORT}/docmosisTornado${DOCMOSIS_VERSION}.zip \
+    && unzip docmosisTornado${DOCMOSIS_VERSION}.zip docmosisTornado*.war docs/* licenses/* \
     && mv docmosisTornado*.war docmosisTornado.war \
     && rm -f docmosisTornado${DOCMOSIS_VERSION}.zip
 
@@ -72,6 +74,7 @@ COPY log4j.properties /home/docmosis/
 USER docmosis
 RUN mkdir /home/docmosis/templates /home/docmosis/workingarea
 
+# Tornado configuration
 ENV DOCMOSIS_OFFICEDIR=/opt/libreoffice \
     DOCMOSIS_TEMPLATESDIR=templates \
     DOCMOSIS_WORKINGDIR=workingarea \
