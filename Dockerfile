@@ -69,7 +69,17 @@ RUN DOCMOSIS_VERSION_SHORT=$(echo $DOCMOSIS_VERSION | cut -f1 -d_ | cut -b-3) \
     && mv docmosisTornado*.war docmosisTornado.war \
     && rm -f docmosisTornado${DOCMOSIS_VERSION}.zip
 
-COPY log4j.properties /home/docmosis/
+RUN  printf '%s\n' \
+    "#Normal logging at INFO level" \
+    "log4j.rootCategory=INFO, A1" \
+    "" \
+    "#Detailed logging at DEBUG level"\
+    "#log4j.rootCategory=DEBUG, A1" \
+    "" \
+    "log4j.appender.A1=org.apache.log4j.ConsoleAppender" \
+    "log4j.appender.A1.layout=org.apache.log4j.PatternLayout" \
+    "log4j.appender.A1.layout.ConversionPattern=%d{DATE} [%t] %-5p %c{1} - %m%n" \
+    > /home/docmosis/log4j.properties
 
 USER docmosis
 RUN mkdir /home/docmosis/templates /home/docmosis/workingarea
