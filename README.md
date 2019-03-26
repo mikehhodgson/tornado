@@ -31,7 +31,7 @@ This guide assumes the user is already familiar with Docker and focuses on the D
 
 ## Running Tornado using Docker
 
-The following three steps will create a running Tornado server for you to work with.
+The following steps will create a running Tornado server for you to work with.
 
 1. Obtain a Tornado Trial license key from https://www.docmosis.com/try/tornado.html
 
