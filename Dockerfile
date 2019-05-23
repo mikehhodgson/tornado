@@ -36,11 +36,13 @@ RUN yum install -y https://downloads.sourceforge.net/project/mscorefonts2/rpms/m
     && yum clean all \
     && rm -rf /var/cache/yum
 
-ENV LIBREOFFICE_VERSION=6.1.5
-
 # mirror list https://download.documentfoundation.org/mirmon/allmirrors.html
-RUN echo "Downloading LibreOffice ${LIBREOFFICE_VERSION}..." \
-    && wget --quiet http://mirror.sjc02.svwh.net/tdf/libreoffice/stable/${LIBREOFFICE_VERSION}/rpm/x86_64/LibreOffice_${LIBREOFFICE_VERSION}_Linux_x86-64_rpm.tar.gz \
+ENV LIBREOFFICE_MIRROR=http://mirror.sjc02.svwh.net/tdf/libreoffice/stable/
+
+RUN echo "Checking available LibreOffice versions from ${LIBREOFFICE_MIRROR}" \
+    && LIBREOFFICE_VERSION=$(curl --silent ${LIBREOFFICE_MIRROR} | grep -Eo "[0-9].[0-9].[0-9]" | head -n1) \
+    && echo "Downloading LibreOffice ${LIBREOFFICE_VERSION}..." \
+    && wget --quiet ${LIBREOFFICE_MIRROR}${LIBREOFFICE_VERSION}/rpm/x86_64/LibreOffice_${LIBREOFFICE_VERSION}_Linux_x86-64_rpm.tar.gz \
     && tar -xf LibreOffice_${LIBREOFFICE_VERSION}_Linux_x86-64_rpm.tar.gz \
     && cd LibreOffice_*_Linux_x86-64_rpm/RPMS \
     && (rm -f *integ* || true) \
