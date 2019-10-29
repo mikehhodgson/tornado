@@ -1,5 +1,7 @@
 ![Docmosis](https://raw.githubusercontent.com/mikehhodgson/tornado/master/images/docmosis.png)
 
+This repository is no longer maintained. Please see the official release at https://github.com/Docmosis/tornado-docker.
+
 # Getting Started with Tornado Using Docker BETA
 
 ## Introduction
